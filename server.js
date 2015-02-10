@@ -27,7 +27,7 @@ var broker = jackrabbit(RABBIT_URL, 1)
 var server = express()
   .set('view engine', 'jade')
   .set('view cache', true)
-  .get('/', parallel([ getWeather, getMap, getHits, getKitten ], SERVICE_TIME), renderHome)
+  .get('/', parallel([ getWeather, getQuote, getCute ], SERVICE_TIME), renderHome)
   .listen(PORT, onListen);
 
 // Callbacks
@@ -35,9 +35,8 @@ var server = express()
 function onBroker() {
   logger.log({ type: 'info', message: 'connected', service: 'broker' });
   broker.create('weather.get');
-  broker.create('map.get');
-  broker.create('hits.get');
-  broker.create('kitten.get');
+  broker.create('quote.get');
+  broker.create('cute.get');
 }
 
 function onListen(err) {
@@ -57,23 +56,16 @@ function getWeather(req, res, next) {
   });
 }
 
-function getMap(req, res, next) {
-  broker.publish('map.get', { zip: req.query.zip }, function onMap(err, map) {
-    res.locals.map = map;
+function getQuote(req, res, next) {
+  broker.publish('quote.get', {}, function onQuote(err, quote) {
+    res.locals.quote = quote;
     next();
   });
 }
 
-function getHits(req, res, next) {
-  broker.publish('hits.get', {}, function onHits(err, hits) {
-    res.locals.hits = hits;
-    next();
-  });
-}
-
-function getKitten(req, res, next) {
-  broker.publish('kitten.get', {}, function onKitten(err, kitten) {
-    res.locals.kitten = kitten;
+function getCute(req, res, next) {
+  broker.publish('cute.get', {}, function onCute(err, cute) {
+    res.locals.cute = cute;
     next();
   });
 }
