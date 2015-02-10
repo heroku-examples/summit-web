@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node server.js"
   },
+  "engines": {
+    "node": "0.12.0"
+  },
   "author": "Hunter Loftis <hunter@heroku.com>",
   "license": "ISC",
   "dependencies": {
