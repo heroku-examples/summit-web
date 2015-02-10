@@ -1,0 +1,17 @@
+{
+  "name": "summit-web",
+  "version": "1.0.0",
+  "description": "Node Summit 2015 Heroku Web example",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Hunter Loftis <hunter@heroku.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.11.2",
+    "jackrabbit": "^3.0.8",
+    "jade": "^1.9.2",
+    "logfmt": "^1.2.0"
+  }
+}
